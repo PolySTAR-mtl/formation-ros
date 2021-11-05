@@ -147,10 +147,10 @@ Ne pas oublier de \texttt{source devel/setup.bash}
         \item Possibilité d'inclure des sous-fichiers (slide suivante)
     \end{itemize}
     \item Manuel : \begin{itemize}
-        \item Lancer un \texttt{roscore} : serveur de dispatch des messages ROS \footnote{(ou
-        alternativement donner une IP, env \texttt{ROS\_HOSTNAME} et \texttt{ROS\_MASTER\_URI}),
+        \item Lancer un \texttt{roscore} : serveur de dispatch des messages ROS \footnote{ou
+        alternativement donner une IP, env \texttt{ROS\_HOSTNAME} et \texttt{ROS\_MASTER\_URI},
         \href{http://wiki.ros.org/ROS/NetworkSetup}{Turo ROS Network}}
-        \item \texttt{rosnode start} \textit{nodename}
+        \item \texttt{rosnode start} \textit{nodename} [\texttt{param1:=value1} ...]
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -162,14 +162,22 @@ Ne pas oublier de \texttt{source devel/setup.bash}
 Ex : \texttt{mon\_module\_cpp/msg/MonMessage.msg}
 
 \begin{minted}[fontsize=\scriptsize]{text}
-float32 un_float            # Commentaire
-float32[] tableau_float
-String str
-UnAutreMessage msg
-time timestamp
-sensor_msgs/Image img       # Image OpenCV
-\end{minted}
+<launch>
+    <!-- Args -->
+    <arg name="argument" default="False"/>
 
+    <!-- Parameters -->
+    <param name="/param_global" value="42" />
+
+    <!-- Sub-files -->
+    <include file="$(find mon_module_cpp)/launch/default.launch">
+        <arg name="local" value="$(eval not arg('argument'))" />
+    </include>
+
+    <!-- Nodes -->
+    <node name="nodepy" pkg="mon_module_python" type="nodepy"/>
+</launch>
+\end{minted}
 \end{frame}
 
 
