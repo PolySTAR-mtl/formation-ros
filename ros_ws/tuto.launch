@@ -1,0 +1,16 @@
+<launch>
+    <!-- Args -->
+    <arg name="argument" default="False"/>
+
+    <!-- Parameters -->
+    <param name="/param_global" value="42" />
+
+    <!-- Sub-files -->
+    <include file="$(find mon_package_cpp)/launch/default.launch">
+        <arg name="local" value="$(eval not arg('argument'))" />
+    </include>
+
+    <!-- Nodes -->
+    <node name="mon_noeud_python" pkg="mon_package_python" type="nodepy.py" output="screen"/>
+</launch>
+

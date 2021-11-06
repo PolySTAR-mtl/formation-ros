@@ -1,0 +1,5 @@
+<launch>
+    <arg name="local"/>
+
+    <node name="mon_noeud_cpp" pkg="mon_package_cpp" type="mon_noeud_cpp" output="screen"/>
+</launch>
