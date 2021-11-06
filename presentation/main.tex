@@ -47,21 +47,23 @@ Robot Operation System (ROS), framework logiciel pour la robotique
 \dirtree{%
 .1 \texttt{ros\_ws/}.
     .2 \texttt{.catkin\_workspace}.
-    .2 \texttt{CMakeLists.txt}.
     .2 \textit{devel/}.
     .2 \textit{build/}.
     .2 \texttt{src/}.
+        .3 \texttt{CMakeLists.txt}.
         .3 \texttt{mon\_module\_cpp}.
             .4 \texttt{include/}.
             .4 \texttt{src/}.
             .4 \texttt{msg/}.
             .4 \texttt{launch/}.
             .4 \texttt{CMakeLists.txt}.
+            .4 \texttt{package.xml}.
         .3 \texttt{mon\_module\_python}.
             .4 \texttt{script/}.
             .4 \texttt{msg/}.
             .4 \texttt{launch/}.
             .4 \texttt{CMakeLists.txt}.
+            .4 \texttt{package.xml}.
 }
 }
 \end{frame}
@@ -74,14 +76,14 @@ C++\footnote{\href{http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber\
 }
 \begin{minted}[fontsize=\scriptsize]{cpp}
 #include <ros/ros.h>
-#include "mon_module_cpp/MonMessage.h"
+#include "mon_package_cpp/MonMessage.h"
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "nom_noeud");
     ros::NodeHandle nh;
 
     ros::Publisher pub = 
-        nh.advertise<mon_module_cpp::MonMessage>("topic1",1);
+        nh.advertise<mon_package_cpp::MonMessage>("topic1",1);
 
     ros::Subscriber sub = nh.subscribe("topic2", 1, callback);
     ros::spin();
@@ -99,7 +101,7 @@ int main(int argc, char** argv) {
 \begin{minted}[fontsize=\scriptsize]{python}
 import rospy
 
-from mon_module_cpp.msg import MonMessage # Autre module
+from mon_package_cpp.msg import MonMessage # Autre module
 from std_msgs.msg import String
 
 rospy.init_node('nom_noeud', anonymous=True)
@@ -118,9 +120,11 @@ Ex : \texttt{mon\_module\_cpp/msg/MonMessage.msg}
 \begin{minted}[fontsize=\scriptsize]{text}
 float32 un_float            # Commentaire
 float32[] tableau_float
-String str
+string str
+
 UnAutreMessage msg
 time timestamp
+
 sensor_msgs/Image img       # Image OpenCV
 \end{minted}
 
@@ -170,12 +174,12 @@ Ex : \texttt{ros\_ws/tuto.launch}
     <param name="/param_global" value="42" />
 
     <!-- Sub-files -->
-    <include file="$(find mon_module_cpp)/launch/default.launch">
+    <include file="$(find mon_package_cpp)/launch/default.launch">
         <arg name="local" value="$(eval not arg('argument'))" />
     </include>
 
     <!-- Nodes -->
-    <node name="nodepy" pkg="mon_module_python" type="nodepy"/>
+    <node name="nodepy" pkg="mon_package_python" type="nodepy"/>
 </launch>
 \end{minted}
 \end{frame}
