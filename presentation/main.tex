@@ -47,7 +47,7 @@ Robot Operation System (ROS), framework logiciel pour la robotique
 \dirtree{%
 .1 \texttt{ros\_ws/}.
     .2 \texttt{.catkin\_workspace}.
-    .2 \texttt{CMakeLists.txt}
+    .2 \texttt{CMakeLists.txt}.
     .2 \textit{devel/}.
     .2 \textit{build/}.
     .2 \texttt{src/}.
@@ -158,8 +158,8 @@ Ne pas oublier de \texttt{source devel/setup.bash}
 %% roslaunch
 \begin{frame}[fragile]
 \frametitle{\texttt{roslaunch}\footnote{\href{http://wiki.ros.org/roslaunch/XML
-}{Reference XML roslaunch}}}
-Ex : \texttt{mon\_module\_cpp/msg/MonMessage.msg}
+}{Référence XML roslaunch}}}
+Ex : \texttt{ros\_ws/tuto.launch}
 
 \begin{minted}[fontsize=\scriptsize]{text}
 <launch>
@@ -183,10 +183,25 @@ Ex : \texttt{mon\_module\_cpp/msg/MonMessage.msg}
 
 %% Utilitaires en terminal
 \begin{frame}
-\frametitle{\texttt{catkin\_make}}
+\frametitle{Utilitaires}
 \begin{itemize}
-    \item Système de build basé sur CMake/Make
-    \item Se lance à la racine du workspace : \texttt{ros\_ws}
+    \item \texttt{rosnode list} : liste des noeuds lancés
+    \item \texttt{rostopic list} : liste des topics fournis
+    \item \texttt{rostopic echo} : écrire les messages d'un topic
+    \item \texttt{rosparam} \texttt{set} / \texttt{get} / \texttt{list} ..
+\end{itemize}
+\end{frame}
+
+%% Utilitaires en terminal
+\begin{frame}
+\frametitle{En apprendre plus ..}
+\begin{itemize}
+    \item \texttt{rviz} : outil de visualisation 3D pour la robotique
+    \item \texttt{rqt} : dashboard de visualisation capteurs / topics
+    \item \texttt{tf2} : gestion des référentiels
+    \item \texttt{dynamic\_reconfigure} : changer des paramètres à la volée
+    \item \texttt{rosbag} : enregistrement / lecture de datasets
+    \item ...
 \end{itemize}
 \end{frame}
     
