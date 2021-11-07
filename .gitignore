@@ -1,0 +1,4 @@
+**/build/
+**/devel/
+presentation/.vscode
+presentation/_minted-build
